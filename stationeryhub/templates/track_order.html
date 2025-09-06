@@ -1,0 +1,73 @@
+{% extends "stationeryhub/layout/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="container-fluid">
+    <img src="{% static 'images/cart_banner.png' %}" alt="cart_banner" class="img-fluid cartbanner-img rounded-4">
+</section>
+
+<section class="container my-5">
+    <h3 class="mb-2">Order ID: {{ order.id }}</h3>
+
+    <!-- Order Info -->
+    <div class="mb-4 p-3">
+        <p class="mb-1"><strong>Seller:</strong> SupplyHive</p>
+        <p class="mb-0"><strong>Total:</strong> Rs. {{ order.total|floatformat:2 }}</p>
+    </div>
+
+    <!-- Vertical Progress Tracker -->
+    <div class="vertical-progress mb-5">
+        {% for step in steps %}
+        <div class="step {% if forloop.counter0 <= current_step %}completed{% endif %}">
+            <div class="step-circle">
+                {% if forloop.counter0 <= current_step %} &#10003; <!-- tick mark -->
+                    {% endif %}
+            </div>
+            <div class="step-label">
+                <strong>{{ step }}</strong>
+                {% if step == "Order Confirmed" %}
+                <br><small>{{ order.created_at|date:"d M, Y" }}</small>
+                {% elif step == "Delivered" and order.status == "Delivered" %}
+                <br><small>{{ order.delivered_at|date:"d M, Y" }}</small>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Order Items -->
+   <div class="d-flex justify-content-center">
+    <div class="col-md-5">
+        {% for item in order.items.all %}
+        <div class="payment-sec py-2 px-4 rounded-4 mb-2">
+            <h2 class="text-black mb-4">Your Order</h2>
+            <div class="d-flex justify-content-between mb-3">
+                <h5 class="text-black">Products</h5>
+                <h5 class="text-black">Subtotal</h5>
+            </div>
+            <div class="d-flex justify-content-between mb-3">
+                <p class="text-black">{{ item.product.name }} X {{ item.quantity }}</p>
+                <p class="text-black mb-0">Rs. {{ item.product.price }}</p>
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="payment-sec pt-2 px-4 rounded-4 input-blue">
+            <p class="d-flex justify-content-between align-items-center text-black fw-bold">
+                Total <span>Rs. {{ order.total|floatformat:2 }}</span>
+            </p>
+        </div>
+
+        <div class="mt-4 text-center">
+            <p class="mb-0">{{ order.payment_method }}</p>
+        </div>
+
+    </div>
+</div>
+
+
+
+</section>
+
+{% endblock %}

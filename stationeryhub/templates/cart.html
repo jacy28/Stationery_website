@@ -1,0 +1,118 @@
+{% extends "stationeryhub/layout/base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="container my-5">
+    <h1 class="text-black text-center fw-bold mb-3 mb-lg-5">My Cart</h1>
+
+    {% if cart_items %}
+    <!-- Cart Items Section -->
+    <section class="container">
+        {% for item in cart_items %}
+        <div class="row py-3 mb-3" style="border: 1px solid black; border-radius: 20px;">
+
+            <!-- Product Image + Name -->
+            <div class="col-md-4 d-flex align-items-center">
+                <div class="d-flex flex-column align-items-center justify-content-center">
+                    <h3 class="text-black text-center fw-bold d-none d-md-block">Product</h3>
+                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"
+                         class="img-fluid cart-img rounded-4">
+                    <div class="mt-3">
+                        <h6 class="mb-1 text-center">{{ item.product.name }}</h6>
+                        <p class="text-black text-center fw-bold mb-0">Rs. {{ item.product.price }}</p>
+                        <p class="text-success text-center">Buy 3+ @ Rs. {{ item.product.offer_price }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quantity Controls -->
+            <div class="col-md-2 text-center mb-2 mb-md-0">
+                <div class="d-flex flex-column justify-content-center align-items-center gap-2">
+                    <h3 class="text-black text-center fw-bold d-none d-md-block">Quantity</h3>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <form method="post" action="{% url 'update_cart' item.id 'decrease' %}" class="cart-form me-2">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-dark">-</button>
+                        </form>
+
+                        <span class="fw-bold px-2 quantity" data-item-id="{{ item.id }}">{{ item.quantity }}</span>
+
+                        <form method="post" action="{% url 'update_cart' item.id 'increase' %}" class="cart-form ms-2">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-dark">+</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit Price -->
+            <div class="col-md-2 text-center">
+                <h3 class="text-black text-center fw-bold mt-auto">Unit Price</h3>
+                <p class="mb-0 fw-bold mt-auto">Rs. {{ item.product.price }}</p>
+            </div>
+
+            <!-- Total Price -->
+            <div class="col-md-2 text-center">
+                <h3 class="text-black text-center fw-bold">Total Price</h3>
+                <p class="mb-0 fw-bold mt-auto item-total" data-item-id="{{ item.id }}">
+                    Rs. {{ item.total_price|floatformat:2 }}
+                </p>
+            </div>
+
+            <!-- Remove Button -->
+            <div class="col-md-2 text-center">
+                <a href="{% url 'remove_cart' item.id %}" class="btn btn-danger btn-sm remove-cart-btn"
+                   data-item-id="{{ item.id }}">
+                    <i class="bi bi-trash"></i>
+                </a>
+            </div>
+
+        </div>
+        {% endfor %}
+    </section>
+
+    <!-- Totals Section -->
+    <section class="container">
+        <div class="row align-items-center gy-4">
+            <!-- Left Column -->
+            <div class="col-md-6">
+                <div class="p-3 p-md-0 mx-auto" style="width: 400px;">
+                    <p class="text-black d-flex justify-content-between">
+                        <span>Subtotal</span>
+                        <span id="subtotal">Rs. {{ subtotal|floatformat:2 }}</span>
+                    </p>
+                    <p class="text-black d-flex justify-content-between">
+                        <span>Tax</span>
+                        <span id="tax">Rs. {{ tax|floatformat:2 }}</span>
+                    </p>
+                    <p class="text-black d-flex justify-content-between">
+                        <span>Shipping</span>
+                        <span id="shipping">Rs. {{ shipping|floatformat:2 }}</span>
+                    </p>
+                    <h4 class="text-black d-flex justify-content-between">
+                        <span>Total</span>
+                        <span id="total">Rs. {{ total|floatformat:2 }}</span>
+                    </h4>
+                    <div class="text-center mt-3 mt-lg-4">
+                        <a href="{% url 'payment' %}" class="btn btn-primary w-100 rounded-pill">
+                            Proceed to Checkout
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-md-6 text-center">
+                <img src="{% static 'images/reminder.png' %}" alt="reminder img" class="img-fluid">
+            </div>
+        </div>
+    </section>
+
+    {% else %}
+    <!-- Empty Cart Message -->
+    <div class="d-flex justify-content-center align-items-center vh-75">
+        <p class="text-muted fw-bold">🛒 Your cart is empty.</p>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

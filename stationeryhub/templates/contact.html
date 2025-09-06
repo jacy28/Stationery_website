@@ -1,0 +1,104 @@
+{% extends 'stationeryhub/layout/base.html' %}
+
+{% load static %}
+
+{% block title %} Contact {% endblock %}
+
+{% block content %}
+
+<section class="container-fluid my-3">
+    <img src="{% static 'images/contact_banner.png' %}" alt="About banner" class="img-fluid contactbanner-img">
+</section>
+
+<section class="container my-5">
+    <h1 class="text-center text-black fw-bold mt-5">"Your Perfect Stationery Partner Is Just a Message Away."</h1>
+</section>
+
+<section class="container my-4">
+    <div class="row text-center contact p-3">
+        <h2 class="text-black text-center mb-3">Contact Details</h2>
+        {% for contact in contacts %}
+        <div class="col-md-4 d-flex mb-3">
+            <div
+                class="contact-card text-center p-4 bg-primary text-black rounded-4 shadow-sm w-100 d-flex flex-column h-100">
+                <i class="bi {{ contact.icon }} fs-1 mb-3"></i>
+                <h5 class="fw-bold">{{ contact.title }}</h5>
+
+                <!-- Address -->
+                {% if contact.address %}
+                <p class="mb-2">{{ contact.address }}</p>
+                {% endif %}
+
+                <!-- Phones -->
+                {% for phone in contact.phones.all %}
+                <div class="mb-1">{{ phone.number }}</div>
+                {% endfor %}
+
+                <!-- Emails -->
+                {% for email in contact.emails.all %}
+                <div class="mb-1">{{ email.email }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="container my-3 my-lg-5">
+    <img src="{% static 'images/map.png' %}" alt="map img" class="img-fluid map-img" style="border-radius: 20px;">
+</section>
+
+<section class="container my-4 contact-form p-4">
+    <h2 class="text-black text-center fw-bold">
+        Have a List? We've Got the Stationery—Contact Us Now!
+    </h2>
+    <p class="text-center">Write Us</p>
+    <p class="text-center">
+        We are always happy to be of service to you. Be sure to listen to the prompt to help direct you to the right person.
+    </p>
+
+
+    <form method="POST" class="row g-3 justify-content-center">
+        {% csrf_token %}
+
+        <div class="col-md-5 mb-2">
+            <label class="form-label fw-bold">Name</label>
+            {{ form.name }}
+        </div>
+
+        <div class="col-md-5">
+            <label class="form-label fw-bold">Email</label>
+            {{ form.email }}
+        </div>
+
+        <div class="col-md-5 fw-bold">
+            <label class="form-label">Phone Number</label>
+            {{ form.phone }}
+        </div>
+
+        <div class="col-md-5 fw-bold">
+            <label class="form-label">Message</label>
+            {{ form.message }}
+        </div>
+
+        <div class="col-12 text-center">
+            <button type="submit" class="btn btn-primary rounded-pill px-4">Send Message</button>
+        </div>
+    </form>
+
+     {% if messages %}
+      <div class="mt-3">
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible fade show text-center" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+</section>
+
+
+
+{% endblock %}

@@ -1,0 +1,148 @@
+{% extends 'stationeryhub/layout/base.html' %}
+
+{% load static %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+
+<section class="container-fluid my-3">
+    <img src="{% static 'images/home_banner.png' %}" alt="Home banner" class="img-fluid homebanner-img">
+</section>
+
+<section class="container my-5">
+    <h2 class="text-black fw-bold text-center mb-3">Essential Stationery, Exceptional Supply</h2>
+    <p class="text-black text-center d-none d-md-block lh-sm mb-3 mb-lg-5">From pens to paper, we deliver quality that
+        power
+        classrooms, offices, and creativity. <br> Bulk pricing, reliable service, and everything your workspace needs -
+        right at your fingertips.</p>
+
+    <div class="row g-3 justify-content-center">
+        {% for stationery in stationeries %}
+        <div class="col-md-6 col-lg-4 ">
+            <div class="p-2 stationery-img">
+                <img src="{{stationery.image.url}}" alt="{{stationery.name}}" class="img-fluid">
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="row g-3 align-items-center mt-3">
+        <div class="col-md-7 col-lg-8">
+            {% for stationery in stationeries %}
+            <div class="p-2">
+                <h3 class="text-black fw-bold">{{stationery.name}}</h3>
+                <p class="text-black">{{stationery.desc}}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="col-md-5 col-lg-4 d-none d-md-block">
+            <div class="p-1">
+                <img src="{% static 'images/stationery4.png' %}" alt="Stationery img" class="img-fluid">
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section class="container my-3">
+    <div class="row g-5 justify-content-center">
+        <h2 class="text-center fw-bold">Featured Products</h2>
+        {% for product in featured_products %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-0">
+                <img src="{{product.image.url}}" alt="{{product.name}}" class="img-fluid featured-img">
+                <div class="card-body text-center text-black">
+                    <p>{{product.name}} <br><i class="bi bi-star-fill" style="color: yellow;"></i> <i
+                            class="bi bi-star-fill" style="color: yellow;"></i> <i class="bi bi-star-fill"
+                            style="color: yellow;"></i> <i class="bi bi-star-fill" style="color: yellow;"></i> <i
+                            class="bi bi-star-fill" style="color: yellow;"></i></p>
+                    <p class="fw-bold">Rs. {{product.price}}</p>
+                    <p class="fw-bold">Buy 3 or more @ Rs. {{product.offer_price}}</p>
+                    <a href="{% url 'add_to_cart' product.id %}" class="btn add-to-cart-btn bg-white text-black">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="container mt-5">
+    <div class="row g-3 g-lg-5">
+        <h2 class="fw-bold text-center">Trending</h2>
+        {% for product in trending_products %}
+        <div class="col-md-6 col-lg-4">
+            <div class="trending-img">
+                <img src="{{product.image.url}}" alt="Trending img" class="img-fluid">
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="container mt-5">
+    <h2 class="text-center fw-bold">Customer Testimonal</h2>
+    <p class="text-center lh-sm">Bulk Stationery. Better Price. Smarter Supply</p>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="testimonal">
+                <div class="testimonal-img text-center mb-2">
+                    <img src="{% static 'images/testimonal.jpg' %}" alt="Testimonal img"
+                        class="img-fluid rounded-circle">
+                </div>
+                <div class="testimonal-body text-center">
+                    <h4>Priya M</h4>
+                    <p>Retail Shop Owner</p>
+                    <p>"Working with SupplyHive has been a game-changer for my store. The quality of the stationery is
+                        consistently high, prices are competitive, and orders always arrive on time - making it easy to
+                        keep my shelves stocked and customers happy."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container mt-5">
+    <div class="row g-5 justify-content-center">
+        <h2 class="text-center fw-bold">Back to School</h2>
+        {% for product in school_products %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-0">
+                <img src="{{product.image.url}}" alt="{{product.name}}" class="img-fluid featured-img">
+                <div class="card-body text-center text-black">
+                    <p>{{product.name}} <br><i class="bi bi-star-fill" style="color: yellow;"></i> <i
+                            class="bi bi-star-fill" style="color: yellow;"></i> <i class="bi bi-star-fill"
+                            style="color: yellow;"></i> <i class="bi bi-star-fill" style="color: yellow;"></i> <i
+                            class="bi bi-star-fill" style="color: yellow;"></i></p>
+                    <p class="fw-bold">Rs. {{product.price}}</p>
+                    <p class="fw-bold">Buy 3 or more @ Rs. {{product.offer_price}}</p>
+                    <a href="{% url 'add_to_cart' product.id %}" class="btn add-to-cart-btn bg-white text-black">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="container mt-5">
+    <div class="row g-3 justify-content-center">
+        <h2 class="text-center fw-bold">The Team</h2>
+        <p class="text-center">Our team is a dedicated group of professionals passionate about delivering quality
+            stationery in bulk with efficiency and care. With expertise in sourcing, logistics, and customer service, we
+            ensure every order meets the highest standards.</p>
+
+        {% for member in team_members %}
+        <div class="col-md-6 col-lg-4 ">
+            <div class="p-2 team text-center">
+                <img src="{{member.photo.url}}" alt="{{member.name}}" class="img-fluid team-img">
+                <h4 class="mt-4 text-black">{{member.name}}</h4>
+                <p>{{member.role}}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</section>
+
+{% endblock %}

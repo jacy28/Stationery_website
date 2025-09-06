@@ -1,0 +1,88 @@
+{% extends 'stationeryhub/layout/base.html' %}
+
+{% load static %}
+
+{% block title %} About {% endblock %}
+
+{% block content %}
+
+<section class="container-fluid my-3">
+    <img src="{% static 'images/about_banner.png' %}" alt="About banner" class="img-fluid aboutbanner-img">
+</section>
+
+<section class="container my-5">
+    <h1 class="text-black text-center">"Smart Supplies for Bright Future."</h1>
+    <p class="text-center text-black">We provide quality stationery and school supplies to support learning, creativity,
+        and organization. From classrooms to home desks, we're here to help students and educators stay prepared and
+        inspired.</p>
+
+    <div class="row g-3 justify-content-center mt-4">
+        {% for product in school_products %}
+        <div class="col-md-6 col-lg-4 ">
+            <img src="{{product.image.url}}" alt="School accessories" class="img-fluid aboutschool-img">
+        </div>
+        {% endfor %}
+    </div>
+
+</section>
+
+<section class="container my-5">
+    {% for section in sections %}
+    <div class="row mb-5 justify-content-center">
+        <div class="col-12">
+            <h2 class="text-black fw-bold">{{ section.title }}</h2>
+            <p class="text-black">{{ section.desc }}</p>
+        </div>
+
+        {% if section.images.count == 2 %}
+        <!-- Layout for 2 images -->
+        {% for img in section.images.all %}
+        <div class="col-md-6 mb-3">
+            <img src="{{ img.image.url }}" alt="{{ section.title }}" class="img-fluid mb-3 writingtool-img">
+        </div>
+        {% endfor %}
+
+        {% elif section.images.count == 3 %}
+        <!-- Layout for 3 images -->
+        <div class="col-md-6 mb-3">
+            <!-- Big image left -->
+            <img src="{{ section.images.all.0.image.url }}" alt="{{ section.title }}"
+                class="img-fluid aboutsec-img ">
+        </div>
+
+        <div class="col-md-6 d-flex flex-column gap-3">
+            <!-- Stacked images right -->
+            <img src="{{ section.images.all.1.image.url }}" alt="{{ section.title }}"
+                class="img-fluid aboutsec-img mb-3">
+            <img src="{{ section.images.all.2.image.url }}" alt="{{ section.title }}"
+                class="img-fluid aboutsec-img ">
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+</section>
+
+
+
+<section class="container my-5">
+    <div class="row g-3 justify-content-center">
+        <h2 class="text-center text-black fw-bold">The Team</h2>
+        <p class="text-center">Our team is a dedicated group of professionals passionate about delivering quality
+            stationery in bulk with efficiency and care. With expertise in sourcing, logistics, and customer service, we
+            ensure every order meets the highest standards.</p>
+
+        {% for member in team_members %}
+        <div class="col-md-6 col-lg-4 ">
+            <div class="p-2 team text-center">
+                <img src="{{member.photo.url}}" alt="{{member.name}}" class="img-fluid team-img">
+                <h4 class="mt-4 text-black">{{member.name}}</h4>
+                <p>{{member.role}}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</section>
+
+{% endblock%}

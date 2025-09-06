@@ -1,0 +1,74 @@
+{% load static %}
+
+<footer class="footer pt-5 pb-4 bg-light border-top">
+  <div class="container-fluid">
+    <div class="row g-3">
+      
+      <!-- Logo & Brand -->
+      <div class="col-12 col-lg-2">
+        <a href="{% url 'home' %}" class="text-decoration-none text-black d-flex flex-column align-items-center">
+          <img src="{% static 'images/logo.png' %}" alt="Company Logo" class="mb-2 mb-md-0 me-md-3" width="60" height="60"> 
+            <span class="fw-bold">Supply Hive</span>
+        </a>
+      </div>
+
+      <!-- Company -->
+      <div class="col-md-3 col-lg-2">
+        <h6 class="fw-bold mb-3">Company</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-1"><a href="{% url 'about' %}" class="text-decoration-none text-muted">About Us</a></li>
+          <li class="mb-1"><a href="#" class="text-decoration-none text-muted">SupplyHive Corporate</a></li>
+          <li class="mb-1"><a href="#" class="text-decoration-none text-muted">Careers</a></li>
+          <li class="mb-1"><a href="#" class="text-decoration-none text-muted">Team</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="col-md-3 col-lg-2">
+        <h6 class="fw-bold mb-3">Contact</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-1"><a href="#" class="text-decoration-none text-muted">Help & Support</a></li>
+          <li class="mb-1"><a href="#" class="text-decoration-none text-muted">Partner with us</a></li>
+          <li class="mb-1"><a href="#" class="text-decoration-none text-muted">Ride with us</a></li>
+        </ul>
+      </div>
+
+      <!-- Available -->
+      <div class="col-md-3 col-lg-2">
+        <h6 class="fw-bold mb-3">Available in</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="text-muted mb-1">Coimbatore</li>
+          <li class="text-muted mb-1">Bengaluru</li>
+          <li class="text-muted mb-1">Chennai</li>
+          <li class="text-muted mb-1">Kolkata</li>
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div class="col-md-3 col-lg-2">
+        <h6 class="fw-bold mb-3">Legal</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-1"><a href="#" class="text-decoration-none text-muted">Terms & Conditions</a></li>
+          <li class="mb-1"><a href="#" class="text-decoration-none text-muted">Cookie Policy</a></li>
+          <li class="mb-1"><a href="#" class="text-decoration-none text-muted">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <!-- Information -->
+      <div class="col-md-3 col-lg-2">
+        <h6 class="fw-bold mb-3">Information</h6>
+        <ul class="list-unstyled mb-2">
+          <li class="text-muted mb-1">Location</li>
+          <li class="text-muted mb-1">Email</li>
+          <li class="text-muted mb-2">Social Media</li>
+        </ul>
+        <div class="social-icons d-flex gap-3">
+          <a href="#" class="me-2"><img src="{% static 'images/instagram.png' %}" alt="insta icon"></a>
+          <a href="#" class="me-2"><img src="{% static 'images/facebook.png' %}" alt="facebook icon"></a>
+          <a href="#" ><img src="{% static 'images/whatsapp.png' %}" alt="whatsapp icon" class="img-fluid"></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>

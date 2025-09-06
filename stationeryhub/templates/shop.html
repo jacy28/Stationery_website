@@ -1,0 +1,128 @@
+{% extends 'stationeryhub/layout/base.html' %}
+
+{% load static %}
+
+{% block title %} Shop {% endblock %}
+
+{% block content %}
+
+<section class="container-fluid my-3">
+
+    {% if selected_category and selected_category.banner %}
+    <img src="{{selected_category.banner.url}}" alt="{{selected_category.name}}" class="img-fluid shopbanner-img">
+    {% endif %}
+
+    <h1 class="my-3 my-lg-5 text-center text-black">"Where Ideas Begin - Shop Smart, Stay Sharp!"</h1>
+
+</section>
+
+<section class="container-fluid my-3">
+    <div class="row g-3">
+        <h2 class="text-center text-black fw-bold my-5">{{selected_category.name}}</h2>
+
+        <div class="row">
+
+            <div class="col-md-4 col-lg-3">
+                <!-- Category Filter -->
+                <div class="ps-3 py-2 mb-4 category-filter">
+                    <h5 class="text-black fw-bold">Categories</h5>
+                    <ul class="list-unstyled mb-0">
+                        {% for category in categories %}
+                        <li class="mb-2">
+                            <a href="?category={{ category.id }}"
+                                class="btn border-0 {% if selected_category and selected_category.id == category.id %}text-white{% else %}text-black{% endif %}">
+                                {{ category.name }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <!-- Price Filter as Checkboxes -->
+                <div class="ps-4 py-3 price-filter mb-3">
+                    <h5 class="text-black">Filter by Price</h5>
+                    <form id="priceFilterForm" method="get">
+                        <!-- Preserve selected category -->
+                        {% if selected_category %}
+                        <input type="hidden" name="category" value="{{ selected_category.id }}">
+                        {% endif %}
+
+                        {% for price in price_ranges %}
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" name="price_range" value="{{ price.id }}"
+                                id="price{{ price.id }}" 
+                                {% if selected_price_range and selected_price_range.id == price.id %} checked {% endif %} onchange="this.form.submit()">
+                            <label class="form-check-label text-black" for="price{{ price.id }}">
+                                {{ price.label }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </form>
+                </div>
+
+            </div>
+
+            <!-- ===== Right Column: Products ===== -->
+            <div class="col-md-8 col-lg-9">
+                <div class="row">
+                    {% for product in products %}
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card h-100 border-0">
+                           <img src="{{product.image.url}}" alt="{{product.name}}" class="img-fluid product-img bg-white">
+                            <div class="card-body text-center text-black">
+                                <p>{{product.name}} <br><i class="bi bi-star-fill" style="color: yellow;"></i> <i
+                                        class="bi bi-star-fill" style="color: yellow;"></i> <i class="bi bi-star-fill"
+                                        style="color: yellow;"></i> <i class="bi bi-star-fill"
+                                        style="color: yellow;"></i> <i class="bi bi-star-fill"
+                                        style="color: yellow;"></i></p>
+                                <p class="fw-bold">Rs. {{product.price}}</p>
+                                <p class="fw-bold">Buy 3 or more @ Rs. {{product.offer_price}}</p>
+                                <a href="{% url 'add_to_cart' product.id %}" class="btn add-to-cart-btn bg-white text-black">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <p class="d-flex align-items-center justify-content-center text-danger fw-bold">No products found.</p>
+                    {% endfor %}
+                </div>
+
+                <!-- Pagination -->
+                <!-- <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        {% if products.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link"
+                                href="?page={{ products.previous_page_number }}{% if selected_category %}&category={{ selected_category.id }}{% endif %}{% if selected_price_range %}&price_range={{ selected_price_range.id }}{% endif %}">Previous</a>
+                        </li>
+                        {% endif %}
+
+                        {% for num in products.paginator.page_range %}
+                        {% if products.number == num %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ num }}</span>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a class="page-link"
+                                href="?page={{ num }}{% if selected_category %}&category={{ selected_category.id }}{% endif %}{% if selected_price_range %}&price_range={{ selected_price_range.id }}{% endif %}">{{
+                                num }}</a>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+
+                        {% if products.has_next %}
+                        <li class="page-item">
+                            <a class="page-link"
+                                href="?page={{ products.next_page_number }}{% if selected_category %}&category={{ selected_category.id }}{% endif %}{% if selected_price_range %}&price_range={{ selected_price_range.id }}{% endif %}">Next</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav> -->
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,94 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg bg-white shadow-sm fixed-top">
+    <div class="container-fluid">
+
+        <!-- Logo -->
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="{% url 'home' %}">
+            <img src="{% static 'images/logo.png' %}" alt="Logo" width="50" height="50" class="me-2">
+            Supply Hive
+        </a>
+
+        <!-- Toggler -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links + Search + Buttons -->
+        <div class="collapse navbar-collapse" id="mainNavbar">
+
+            <!-- Center Nav Links -->
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0 text-center d-flex justify-content-center gap-lg-4">
+                <li class="nav-item">
+                    <a class="nav-link text-black {% if 'home' in request.resolver_match.url_name %}active{% endif %}"
+                        href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-black {% if 'shop' in request.resolver_match.url_name %}active{% endif %}"
+                        href="{% url 'shop' %}">Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-black {% if 'about' in request.resolver_match.url_name %}active{% endif %}"
+                        href="{% url 'about' %}">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-black {% if 'contact' in request.resolver_match.url_name %}active{% endif %}"
+                        href="{% url 'contact' %}">Contact</a>
+                </li>
+            </ul>
+
+            <!-- Right Section -->
+            <div class="d-flex flex-column flex-lg-row align-items-center justify-content-center gap-2 mt-2 mt-lg-0">
+
+                <!-- Search -->
+                <form class="d-none d-md-flex" role="search" method="GET" action="{% url 'search' %}">
+                    <div class="input-group">
+                        <span class="input-group-text fw-bold custom-bg border-end-0">
+                            <i class="bi bi-search"></i>
+                        </span>
+                        <input type="text" class="form-control custom-bg border-start-0" name="q" placeholder="Search">
+                    </div>
+                </form>
+
+                <!-- Cart -->
+                <a href="{% url 'cart_view' %}" class="btn btn-outline-success btn-sm position-relative">
+                    <i class="bi bi-cart"></i>
+                    {% if cart_count > 0 %}
+                    <span class="position-absolute top-0 start-100 translate-middle bg-danger text-white rounded-circle" id="cart-count"
+                        style="min-width: 22px; height: 22px; font-size: 12px; display: flex; align-items: center; justify-content: center;">
+                        {{ cart_count }}
+                    </span>
+                    {% endif %}
+                </a>
+
+                <!-- Login / User -->
+                <ul class="navbar-nav ms-lg-3">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-success fw-bold" href="#" id="userDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i> {{ user.username }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="{% url 'my_orders' %}">My Orders</a></li>
+                            <li><a class="dropdown-item" href="{% url 'my_orders' %}">Track Order</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'logout_user' %}">Logout</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <button class="btn custom-bg btn-sm text-white" data-bs-toggle="modal"
+                            data-bs-target="#loginModal">
+                            Login
+                        </button>
+                    </li>
+                    {% endif %}
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</nav>

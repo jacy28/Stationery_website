@@ -1,0 +1,427 @@
+:root {
+    --bg-color: #D3DFF8;
+    --primary-color: #097AFA;
+    --secondary-color: #7AABF5;
+}
+
+/* Navbar */
+.form-control:focus {
+    box-shadow: none !important;
+    border-color: #ced4da;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    padding-top: 80px;
+}
+
+.nav-link:hover {
+    color: #1e90ff !important;
+}
+
+.nav-link.active {
+    color: var(--primary-color) !important;
+    font-weight: 600;
+}
+
+.custom-bg {
+    background-color: var(--primary-color) !important;
+}
+
+.form-control::placeholder {
+    color: white;
+}
+
+
+.input-group-text {
+    border-radius: 20px 0 0 20px;
+}
+
+.form-control {
+    border-radius: 0 20px 20px 0;
+}
+
+/* Home banner */
+.homebanner-img {
+    animation: float 2s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Stationery sec */
+.stationery-img {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stationery-img img {
+    transition: transform 0.3s ease;
+}
+
+.stationery-img:hover {
+    transform: scale(1.05);
+    /* Zoom effect */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    /* Shadow effect */
+}
+
+/* Featured sec */
+.card {
+    background-color: var(--secondary-color);
+    border-radius: 20px !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.1);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+}
+
+.featured-img {
+    border-radius: 20px !important;
+}
+
+.add-to-cart-btn {
+    transition: 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+.trending-img img {
+    animation: fadeSlideUp 2s ease-in-out infinite alternate;
+}
+
+.trending-img:nth-child(1) img {
+    animation-delay: 0s;
+}
+
+.trending-img:nth-child(2) img {
+    animation-delay: 0.3s;
+}
+
+.trending-img:nth-child(3) img {
+    animation-delay: 0.6s;
+}
+
+.trending-img:nth-child(4) img {
+    animation-delay: 0.9s;
+}
+
+.trending-img:nth-child(5) img {
+    animation-delay: 1.2s;
+}
+
+@keyframes fadeSlideUp {
+    0% {
+        transform: translateY(20px);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(20px);
+        opacity: 0.7;
+    }
+}
+
+.testimonal {
+    border-radius: 30px;
+}
+
+
+.testimonal-img img {
+    width: 300px;
+    height: 300px;
+}
+
+.team-img {
+    border-radius: 20px;
+    box-shadow: 6px 8px 4px rgba(0, 0, 0, 0.4);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.team-img:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 10px 12px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Shop page */
+.category-filter,
+.price-filter {
+    background-color: var(--primary-color);
+    border-radius: 20px;
+}
+
+.product-img {
+    height: 200px;
+    border-radius: 20px;
+    background-color: var(--secondary-color);
+    object-fit: cover;
+    width: 100%;
+}
+
+
+.shopbanner-img {
+    display: block;
+    width: 100%;
+    height: auto;
+
+    animation: cinematicHueBlur 10s ease-in-out infinite;
+    filter: hue-rotate(0deg) brightness(1) contrast(1) blur(0px);
+}
+
+@keyframes cinematicHueBlur {
+    0% {
+        filter: hue-rotate(0deg) brightness(0.95) contrast(0.95) blur(0px);
+    }
+    25% {
+        filter: hue-rotate(10deg) brightness(1.02) contrast(1.05) blur(0.5px);
+    }
+    50% {
+        filter: hue-rotate(20deg) brightness(1) contrast(1) blur(0.3px);
+    }
+    75% {
+        filter: hue-rotate(10deg) brightness(1.02) contrast(1.05) blur(0.5px);
+    }
+    100% {
+        filter: hue-rotate(0deg) brightness(0.95) contrast(0.95) blur(0px);
+    }
+}
+
+
+
+/* About Section Banner */
+.aboutbanner-img {
+    animation: aboutWave 5s ease-in-out infinite;
+}
+
+@keyframes aboutWave {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(8px, -8px);
+    }
+
+    50% {
+        transform: translate(0, -12px);
+    }
+
+    75% {
+        transform: translate(-8px, -8px);
+    }
+}
+
+/* About - School Products */
+.aboutschool-img {
+    border-radius: 30px !important;
+    width: 350px;
+    height: 200px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.aboutschool-img:hover {
+    transform: scale(1.05) rotate(-8deg);
+}
+
+/* Pen & Pencil sec */
+.writingtool-img {
+    width: 100%;
+    height: 100%;
+}
+
+.writingtool-img,
+.aboutsec-img {
+    transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.writingtool-img {
+    filter: grayscale(0);
+}
+
+.writingtool-img:hover {
+    filter: grayscale(50%);
+    transform: scale(1.08);
+    /* bigger zoom */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.aboutsec-img {
+    opacity: 0.9;
+}
+
+.aboutsec-img:hover {
+    opacity: 1;
+    transform: translateY(-5px) scale(1.05);
+    /* floating zoom */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Contact Banner */
+.contactbanner-img {
+    animation: softTilt 6s ease-in-out infinite alternate;
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+@keyframes softTilt {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(1.5deg);
+    }
+
+    100% {
+        transform: rotate(-1.5deg);
+    }
+}
+
+.contactbanner-img:hover {
+    transform: scale(1.05) rotate(2deg);
+    filter: brightness(110%);
+}
+
+.contact {
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: rgba(122, 171, 245, 0.3);
+}
+
+.contact-card {
+    min-height: 230px;
+    /* adjust based on design */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.contact-form {
+    border-radius: 20px;
+    border: 1px solid black;
+}
+
+.input-blue {
+    background-color: var(--secondary-color);
+}
+
+.badge{
+    position: absolute;
+}
+
+/* Payment section */
+.payment-sec{
+    border: 1px solid black;
+}
+
+.custom-modal{
+    background-color: var(--primary-color);
+}
+
+.cartbanner-img {
+  animation: slideUpDown 4s ease-in-out infinite;
+}
+
+@keyframes slideUpDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-40px); /* adjust distance */
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+
+.vertical-progress {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-left: 20px;
+}
+
+.vertical-progress::before {
+    content: '';
+    position: absolute;
+    left: 12px; /* center of the circle */
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: lightgray;
+    z-index: 0;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.step:last-child {
+    margin-bottom: 0;
+}
+
+.step-circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    z-index: 1;
+}
+
+.step.completed .step-circle {
+    background-color: green;
+}
+
+.step-label {
+    margin-left: 15px;
+}
+
+
+
+@media (min-width:768px) {
+    body {
+        padding-top: 100px;
+    }
+
+    .dropdown-menu-end {
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+    }
+
+}
