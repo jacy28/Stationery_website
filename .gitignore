@@ -23,5 +23,3 @@ Thumbs.db
 # Secrets
 .env
 
-# Media files (user uploads)
-media/
